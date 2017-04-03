@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Mobile Game</title>
+
+<meta name="viewport" content="user-scalable=no, minimal-ui" />
+
+<script>var zon = true;</script>
+
+<script src="libraries/create.js"></script> 
+<script src="libraries/zim.js"></script>
+<script src="js/view.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/model.js"></script>
+
+<script>
+
+var scaling = "full"; // makes stage the window size but does not scale content
+var width = null;
+var height = null;
+var color = "#ebcb35";
+
+var frame = new zim.Frame(scaling, width, height, color); // see docs for more options and info
+frame.on("ready", function() {
+	zog("ready from ZIM Frame");
+
+	var stage = frame.stage;
+	var stageW = frame.width;
+	var stageH = frame.height;
+
+	//list of things to resize
+	var layoutManager = new zim.LayoutManager();
+	zog(layoutManager);
+
+	var p = app.makePages(stage, stageW, stageH, layoutManager);
+
+	var pages = new zim.Pages({
+		holder:stage,
+		pages:[
+			{page:p.page1, swipe:[null, null, p.page2, p.page2]},
+			{page:p.page2, swipe:[null, null, p.page1, p.page1]}
+		],
+		transition:"slide",
+		speed:1000
+	});
+	pages.addTo(stage);
+
+	frame.on("resize", function() {
+		layoutManager.resize();
+		pages.resize();
+	});
+
+	var c = app.makeController(stage, p, pages);
+
+
+	stage.update();
+
+}, null, true); // end of ready - only run once (true)
+</script>
+</head>
+
+<body>
+<!-- canvas with id="myCanvas" is made by zim Frame -->
+</body>
+</html>
