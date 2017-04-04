@@ -19,7 +19,7 @@
 var scaling = "full"; // makes stage the window size but does not scale content
 var width = null;
 var height = null;
-var color = "#ebcb35";
+var color = "white";
 
 var frame = new zim.Frame(scaling, width, height, color); // see docs for more options and info
 frame.on("ready", function() {
@@ -30,37 +30,59 @@ frame.on("ready", function() {
 	var stageH = frame.height;
 
 	//list of things to resize
-	var layoutManager = new zim.LayoutManager();
-	zog(layoutManager);
 
-	var p = app.makePages(stage, stageW, stageH, layoutManager);
+	frame.loadAssets([
+		"logo.png",
+		"1.jpg",
+		"2.jpg",
+		"3.jpg",
+		"4.jpg",
+		"5.jpg",
+		"6.jpg",
+		"result.png"
+	], "assets/");
 
-	var pages = new zim.Pages({
-		holder:stage,
-		pages:[
-			{page:p.page1, swipe:[null, null, p.page2, p.page2]},
-			{page:p.page2, swipe:[null, null, p.page1, p.page1]}
-		],
-		transition:"slide",
-		speed:1000
-	});
-	pages.addTo(stage);
+	frame.on("complete",function(){
 
-	frame.on("resize", function() {
-		layoutManager.resize();
-		pages.resize();
-	});
+		var layoutManager = new zim.LayoutManager();
 
-	var c = app.makeController(stage, p, pages);
+	    var m = app.makeModel();
 
+		var p = app.makePages(stage, stageW, stageH, layoutManager);
 
-	stage.update();
+		var pages = new zim.Pages({
+			holder:stage,
+			pages:[
+				{page:p.page1, swipe:[null, null, p.page2, p.page2]},
+				{page:p.page2, swipe:[null, null, p.page1, p.page1]},
+				{page:p.page3, swipe:[null, null, p.page1, p.page1]}
+			],
+			transition:"slide",
+			speed:500
+		});
+		pages.addTo(stage);
+
+		var c = app.makeController(stage, p, pages);
+
+		frame.on("resize", function() {
+			layoutManager.resize();
+			pages.resize();
+		});
+
+		frame.on("orientation", function(e) {		
+			stage.update();
+		}); // end of orientation
+
+		stage.update();
+
+    });
+
 
 }, null, true); // end of ready - only run once (true)
+
 </script>
 </head>
 
 <body>
-<!-- canvas with id="myCanvas" is made by zim Frame -->
 </body>
 </html>

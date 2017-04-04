@@ -2,30 +2,38 @@ var app = function(app) {
 
     app.makeController = function(stage, p, pages) {
 
-
-     //    pages.on("page",function(e){
-    	// 	zog(pages.page.name)
-    	// });
-
     	pages.on("pagetransitioned",function(e){
     		zog(pages.page.name)
     	});
 
+        p.page1.button.on("mousedown", function() {
+            pages.go(p.page2, 'right'); //direction you are going to
+        });
 
     	var hotSpots = new zim.HotSpots([
-    	    {page:p.page1, rect:p.page1.tabs.buttons[1], call:function(){pages.go(p.page2, 'down');}},
-		    {page:p.page2, rect:p.page2.logo, call:function(){pages.go(p.page1, 'up');}}
+		    {page:p.page2, rect:p.page2.logo, call:function(){pages.go(p.page1, 'left');}},
+            {page:p.page2, rect:p.page2.tabs, call:function(){reveal();}}
 		]);
 
-        // p.page1.tabs.on("change", function() {
-        //     zog("button = " + p.page1.tabs.text);
-        //     pages.go(p.page2, 'down'); //direction you are going to
-        // });
-
-        // p.page2.logo.on("mousedown",function(){
-        // 	pages.go(p.page1, 'up');
-        // })
-
+        p.page3.button.on("mousedown", function() {
+            pages.go(p.page1, 'right'); //direction you are going to
+        });
+ 
+        var tries = 0;
+        var pic = 0;
+        function reveal(){         
+            var images = ["2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];    
+            var image2 = frame.asset(images[pic]);  
+            p.page2.content.addChild(image2);     
+            stage.update();
+            pic++;    
+            tries++;
+            if (tries >= 6) {  
+                pages.go(p.page3, "right");
+                pic = 0;
+                tries = 0;
+            } 
+        }
     }
     return app;
 }(app || {});
