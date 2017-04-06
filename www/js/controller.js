@@ -1,6 +1,6 @@
 var app = function(app) {
 
-    app.makeController = function(stage, p, pages) {
+    app.makeController = function(stage, p, pages, frame) {
 
     	pages.on("pagetransitioned",function(e){
     		zog(pages.page.name)

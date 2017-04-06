@@ -1,7 +1,7 @@
 
 var app = function(app) {
 
-    app.makePages = function(stage, stageW, stageH, layoutManager){
+    app.makePages = function(stage, stageW, stageH, layoutManager, frame){
         zog(layoutManager)
 
         var p = {};

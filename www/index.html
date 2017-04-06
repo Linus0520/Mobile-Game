@@ -48,7 +48,7 @@ frame.on("ready", function() {
 
 	    var m = app.makeModel();
 
-		var p = app.makePages(stage, stageW, stageH, layoutManager);
+		var p = app.makePages(stage, stageW, stageH, layoutManager, frame);
 
 		var pages = new zim.Pages({
 			holder:stage,
@@ -62,7 +62,7 @@ frame.on("ready", function() {
 		});
 		pages.addTo(stage);
 
-		var c = app.makeController(stage, p, pages);
+		var c = app.makeController(stage, p, pages, frame);
 
 		frame.on("resize", function() {
 			layoutManager.resize();
