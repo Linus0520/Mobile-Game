@@ -6,12 +6,12 @@ var app = function(app) {
 
         var p = {};
 
-        var page1 = p.page1 = new zim.Container(stageW, stageH);
+        var page1 = p.page1 = new zim.Container(stageW, stageH).addTo(stage);
 
         page1.name = "Intro Page";
 
         var logo = frame.asset("logo.png")
-            .addTo(stage);
+            .addTo(page1);
 
         var content = new zim.Rectangle(700,600,"grey")
             .addTo(page1);
@@ -63,8 +63,7 @@ var app = function(app) {
         page2.name = "Second Page";
 
 
-        var logo2 = page2.logo = frame.asset("logo.png")
-            .addTo(stage);
+        var logo2 = page2.logo = frame.asset("logo.png").clone().addTo(page2);
 
         
         var buttons2 = new zim.Container()
@@ -113,8 +112,7 @@ var app = function(app) {
 
         page3.name = "Result Page";
 
-        var logo3 = frame.asset("logo.png")
-            .addTo(stage);  
+        var logo3 = frame.asset("logo.png").clone().addTo(page3);  
         
         var content3 = frame.asset("result.png")
             .addTo(page3);
