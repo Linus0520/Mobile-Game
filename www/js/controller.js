@@ -21,6 +21,7 @@ var app = function(app) {
  
         var tries = 0;
         var pic = 0;
+        
         function reveal(){         
             var images = ["2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];    
             var image2 = frame.asset(images[pic]);  
