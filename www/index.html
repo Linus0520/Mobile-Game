@@ -53,9 +53,9 @@ frame.on("ready", function() {
 		var pages = new zim.Pages({
 			holder:stage,
 			pages:[
-				{page:p.page1, swipe:[null, null, p.page2, p.page2]},
-				{page:p.page2, swipe:[null, null, p.page1, p.page1]},
-				{page:p.page3, swipe:[null, null, p.page1, p.page1]}
+				{page:p.page1, swipe:[null, p.page2, null, null]},
+				{page:p.page2, swipe:[page1, p.page3, null, null]},
+				{page:p.page3, swipe:[p.page2, p.page1, null, null]}
 			],
 			transition:"slide",
 			speed:500
