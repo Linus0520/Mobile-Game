@@ -64,7 +64,6 @@ var app = function(app) {
 
 
         var logo2 = page2.logo = frame.asset("logo.png").clone().addTo(page2);
-
         
         var buttons2 = new zim.Container()
             .addTo(page2);
@@ -72,15 +71,29 @@ var app = function(app) {
         function makeNav(left, right) {
             var nav = new zim.Container();
             // width, height, label, color, rollColor, borderColor, borderThickness, corner, shadowColor
-            nav.left = new zim.Button(390, 180, left, "black", "#444", null, 0, 0, -1);
+            nav.left = new zim.Button(390, 110, left, "black", "#444", null, 0, 0, -1);
             nav.addChild(nav.left);
-            nav.right = new zim.Button(390, 180, right, "black", "#444", null, 0, 0, -1);
+            nav.right = new zim.Button(390, 110, right, "black", "#444", null, 0, 0, -1);
             nav.addChild(nav.right);
             nav.right.x = nav.left.width+2;
             return nav;
         }
+
+        var label3 = new zim.Label({
+           text:"Modern",
+           size:40,
+           color:"white",
+           fontOptions:"bold"
+        });
+
+         var label4 = new zim.Label({
+           text:"Toddler",
+           size:40,
+           color:"white",
+           fontOptions:"bold"
+        });
   
-        var tabs2 = page2.tabs = makeNav("MODERN", "TODDLER");
+        var tabs2 = page2.tabs = makeNav(label3, label4);
 
         buttons2.addChild(tabs2);
 
